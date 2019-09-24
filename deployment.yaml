@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-example-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: mysql-example
+  template:
+    metadata:
+      labels:
+        component: mysql-example
+    spec:
+      containers:
+        - image: mysql:8
+          name: mysql
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: mysql-example-volume
+              mountPath: /var/lib/mysql
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-example-secret
+                  key: mysqlRootPassword
+            - name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-example-secret
+                  key: mysqlDatabase
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-example-secret
+                  key: mysqlUser
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-example-secret
+                  key: mysqlPassword
+      volumes:
+        - name: mysql-example-volume
+          persistentVolumeClaim:
+            claimName: mysql-example-pvc
