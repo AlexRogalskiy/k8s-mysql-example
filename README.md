@@ -14,18 +14,18 @@ We will provide the examples using `kubectl`, the command line interface for pla
 
 Clone the repo using git (or download it) and make sure you are inside the repo's root directory.
 
-    ```
-    git clone https://github.com/mkretz/k8s-mysql-example.git
-    cd k8s-mysql-example
-    ```
+```
+git clone https://github.com/mkretz/k8s-mysql-example.git
+cd k8s-mysql-example
+```
 
 ### Create a secret
 
 We will use a secret to store the database credentials. The secret is not contained in the yaml files, since it contains things which should not end up in source control. We use example credentials below. Of course, you should use secure ones.
 
-    ```
-    kubectl create secret generic mysql-example-secret --from-literal=mysqlRootPassword='admin' --from-literal=mysqlDatabase='example' --from-literal=mysqlUser='exampleuser' --from-literal=mysqlPassword='examplepwd'
-    ```
+```
+kubectl create secret generic mysql-example-secret --from-literal=mysqlRootPassword='admin' --from-literal=mysqlDatabase='example' --from-literal=mysqlUser='exampleuser' --from-literal=mysqlPassword='examplepwd'
+```
 
 ### Create the persistent volume claim
 
