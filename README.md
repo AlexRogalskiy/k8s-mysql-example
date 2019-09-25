@@ -35,7 +35,7 @@ Next we need to create a persistent volume claim in order for the data to be sto
 kubectl apply -f pvc.yaml
 ```
 
-### Create the persistent volume claim
+### Create the deployment
 
 Next we need to deploy mysql.
 
